@@ -4,7 +4,7 @@ wai=$(whoami)
 
 if [ "$wai" != "root" ]
 then
- sudo ./install.sh
+ sudo /etc/init.d/stat.sh &
 else
 while true
 do
