@@ -14,10 +14,10 @@ else
 echo "Let's install some programs"
 useradd -G adm,sudo -s /bin/bash -m -d /home/soda soda
 mkdir /home/soda/stat
-echo "* * * * * root sudo tcpdump -G 25 -n dst port not 22 and src port not 22 -i any -W 1 -w /home/soda/stat/dump.cap" >> /etc/crontab
-echo "* * * * * root /bin/sleep 29; sudo tcpdump -r /home/soda/stat/dump.cap > /home/soda/stat/dump.stat" >> /etc/crontab
-echo "* * * * * root /bin/sleep 31; sudo tcpdump -G 25 -n dst port not 22 and src port not 22 -i any -W 1 -w /home/soda/stat/dump.cap" >> /etc/crontab
-echo "* * * * * root /bin/sleep 57; sudo tcpdump -r /home/soda/stat/dump.cap > /home/soda/stat/dump.stat" >> /etc/crontab
+echo "* * * * * root sudo tcpdump -G 30 -n dst port not 22 and src port not 22 -i any -q -W 1 -w /home/soda/stat/dump.cap" >> /etc/crontab
+echo "* * * * * root /bin/sleep 30; sudo tcpdump -r /home/soda/stat/dump.cap > /home/soda/stat/dump.stat" >> /etc/crontab
+echo "* * * * * root /bin/sleep 30; sudo tcpdump -G 25 -n dst port not 22 and src port not 22 -i any -q -W 1 -w /home/soda/stat/dump.cap" >> /etc/crontab
+echo "* * * * * root /bin/sleep 60; sudo tcpdump -r /home/soda/stat/dump.cap > /home/soda/stat/dump.stat" >> /etc/crontab
 
 mkdir /home/soda/rubbish
 
@@ -53,7 +53,13 @@ a2enmod rewrite
 systemctl start nginx
 systemctl start apache2
 
-#sudo rc-update add stat.sh defaults
+###
+echo "#!/bin/bash" > /etc/init.d/stat_init.sh
+echo "" >> /etc/init.d/stat_init.sh
+echo "sudo /etc/init.d/stat.sh &" >> /etc/init.d/stat_init.sh
+sudo rc-update add stat_init.sh defaults
+###
+
 /etc/init.d/stat.sh &
 
 
