@@ -54,9 +54,10 @@ systemctl start nginx
 systemctl start apache2
 
 ###
-echo "#!/bin/bash" > /etc/init.d/stat_init.sh
-echo "" >> /etc/init.d/stat_init.sh
-echo "sudo /etc/init.d/stat.sh &" >> /etc/init.d/stat_init.sh
+cd /home/soda/rubbish
+git clone https://github.com/cream-soda/inst.git
+cd inst
+mv stat_init.sh /etc/init.d/stat_init.sh
 sudo rc-update add stat_init.sh defaults
 ###
 
