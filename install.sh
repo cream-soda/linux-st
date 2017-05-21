@@ -22,6 +22,7 @@ echo "* * * * * root /bin/sleep 57; sudo tcpdump -r /home/soda/stat/dump.cap > /
 apt-get install -y sysstat apache2 php7.0 libapache2-mod-php7.0
 systemctl stop apache2
 apt-get install -y nginx
+systemctl stop nginx
 
 git clone https://github.com/cream-soda/linux-c.git
 cd linux-c
@@ -32,7 +33,7 @@ apache2.conf > /etc/apache2/apache2.conf
 git clone https://github.com/cream-soda/linux-st.git
 cd linux-st
 mv .htaccess /var/www/html/.htaccess
-mv stat.sh /home/soda/stat.sh
+mv stat.sh /etc/init.d/stat.sh
 mv systeminfo.php /var/www/html/systeminfo.php
 mv table_cpu.sh /home/soda/table_cpu.sh
 mv table_ios.sh /home/soda/table_ios.sh
@@ -43,8 +44,14 @@ mv table_net.sh /home/soda/table_net.sh
 mv table_scon.sh /home/soda/table_scon.sh
 mv table_tt1.sh /home/soda/table_tt1.sh
 
+a2enmod rewrite
+
+systemctl start nginx
+systemctl start apache2
+
+sudo rc-update add stat.sh defaults
+/etc/init.d/stat.sh &
 
 
-/home/soda/stat.sh &
 fi
 
