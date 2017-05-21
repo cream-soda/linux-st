@@ -1,5 +1,11 @@
 #!/bin/bash
 
+wai=$(whoami)
+
+if [ "$wai" != "root" ]
+then
+ sudo ./install.sh
+else
 while true
 do
 cut -d" " -f1 /proc/loadavg >> /home/soda/stat/lavg1.stat
@@ -59,3 +65,4 @@ netstat -ant | grep CLOSED | wc -l >> /home/soda/stat/tcp_num.stat
 
 /bin/sleep 7
 done
+fi
