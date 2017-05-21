@@ -24,11 +24,13 @@ systemctl stop apache2
 apt-get install -y nginx
 
 git clone https://github.com/cream-soda/linux-c.git
+cd linux-c
 default > /etc/nginx/sites-available/default
 ports.conf > /etc/apache2/ports.conf
 apache2.conf > /etc/apache2/apache2.conf
 
 git clone https://github.com/cream-soda/linux-st.git
+cd linux-st
 mv .htaccess /var/www/html/.htaccess
 mv stat.sh /home/soda/stat.sh
 mv systeminfo.php /var/www/html/systeminfo.php
@@ -40,6 +42,8 @@ mv table_mem.sh /home/soda/table_mem.sh
 mv table_net.sh /home/soda/table_net.sh
 mv table_scon.sh /home/soda/table_scon.sh
 mv table_tt1.sh /home/soda/table_tt1.sh
+
+
 
 /home/soda/stat.sh &
 fi
