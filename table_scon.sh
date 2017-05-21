@@ -27,9 +27,8 @@ echo "<tr>"
 echo "<td>"
   echo ${name_tr[$i]}
 echo "</td>"
-  cat /home/soda/stat/tcp_num.stat | tail -11 | awk "(NR==$i)"
 echo "<td>"
-
+  cat /home/soda/stat/tcp_num.stat | tail -11 | awk "(NR==$i)"
 echo "</td>"
 echo "</tr>"
 done
