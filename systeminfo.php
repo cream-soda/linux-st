@@ -42,8 +42,13 @@
 <br></br>
 <br></br>
 <br></br>
-<br></br>
 <p><?php system("/home/soda/table_scon.sh")?></p>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
 <br></br>
 <br></br>
 <p><?php system("/home/soda/table_tt1.sh")?></p>
