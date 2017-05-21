@@ -23,13 +23,24 @@ apt-get install -y sysstat apache2 php7.0 libapache2-mod-php7.0
 systemctl stop apache2
 apt-get install -y nginx
 
-sed 's/root \/var\/www\/html;/#root \/var\/www\/html.nginx;/g' /etc/nginx/sites-available/default > /home/soda/buff
-cat /home/soda/buff > /etc/nginx/sites-available/default
-sed 's/try_files $uri $uri\/ =404;/#/g' /etc/nginx/sites-available/default > /home/soda/buff
-cat /home/soda/buff > /etc/nginx/sites-available/default
-sed 's/location \/ {/{/g' /etc/nginx/sites-available/default > /home/soda/buff
-cat /home/soda/buff > /etc/nginx/sites-available/default
+git clone https://github.com/cream-soda/linux-c.git
+default > /etc/nginx/sites-available/default
+ports.conf > /etc/apache2/ports.conf
+apache2.conf > /etc/apache2/apache2.conf
 
+git clone https://github.com/cream-soda/linux-st.git
+mv .htaccess /var/www/html/.htaccess
+mv stat.sh /home/soda/stat.sh
+mv systeminfo.php /var/www/html/systeminfo.php
+mv table_cpu.sh /home/soda/table_cpu.sh
+mv table_ios.sh /home/soda/table_ios.sh
+mv table_lavg.sh /home/soda/table_lavg.sh
+mv table_lsoc.sh /home/soda/table_lsoc.sh
+mv table_mem.sh /home/soda/table_mem.sh
+mv table_net.sh /home/soda/table_net.sh
+mv table_scon.sh /home/soda/table_scon.sh
+mv table_tt1.sh /home/soda/table_tt1.sh
 
+/home/soda/stat.sh &
 fi
 
