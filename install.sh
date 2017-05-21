@@ -26,9 +26,9 @@ systemctl stop nginx
 
 git clone https://github.com/cream-soda/linux-c.git
 cd linux-c
-default > /etc/nginx/sites-available/default
-ports.conf > /etc/apache2/ports.conf
-apache2.conf > /etc/apache2/apache2.conf
+cat default > /etc/nginx/sites-available/default
+cat ports.conf > /etc/apache2/ports.conf
+cat apache2.conf > /etc/apache2/apache2.conf
 
 git clone https://github.com/cream-soda/linux-st.git
 cd linux-st
