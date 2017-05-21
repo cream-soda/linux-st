@@ -14,10 +14,10 @@ else
 echo "Let's install some programs"
 useradd -G adm,sudo -s /bin/bash -m -d /home/soda soda
 mkdir /home/soda/stat
-echo "* * * * * root sudo tcpdump -G 30 -n dst port not 22 and src port not 22 -i any -q -W 1 -w /home/soda/stat/dump.cap" >> /etc/crontab
-echo "* * * * * root /bin/sleep 30; sudo tcpdump -r /home/soda/stat/dump.cap > /home/soda/stat/dump.stat" >> /etc/crontab
-echo "* * * * * root /bin/sleep 30; sudo tcpdump -G 25 -n dst port not 22 and src port not 22 -i any -q -W 1 -w /home/soda/stat/dump.cap" >> /etc/crontab
-echo "* * * * * root /bin/sleep 60; sudo tcpdump -r /home/soda/stat/dump.cap > /home/soda/stat/dump.stat" >> /etc/crontab
+echo "* * * * * root sudo tcpdump -G 20 -n dst port not 22 and src port not 22 -i any -q -W 1 -w /home/soda/stat/dump.cap" >> /etc/crontab
+echo "* * * * * root /bin/sleep 25; sudo tcpdump -r /home/soda/stat/dump.cap > /home/soda/stat/dump.stat" >> /etc/crontab
+echo "* * * * * root /bin/sleep 30; sudo tcpdump -G 20 -n dst port not 22 and src port not 22 -i any -q -W 1 -w /home/soda/stat/dump.cap" >> /etc/crontab
+echo "* * * * * root /bin/sleep 55; sudo tcpdump -r /home/soda/stat/dump.cap > /home/soda/stat/dump.stat" >> /etc/crontab
 
 mkdir /home/soda/rubbish
 
