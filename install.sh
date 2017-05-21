@@ -19,17 +19,21 @@ echo "* * * * * root /bin/sleep 29; sudo tcpdump -r /home/soda/stat/dump.cap > /
 echo "* * * * * root /bin/sleep 31; sudo tcpdump -G 25 -n dst port not 22 and src port not 22 -i any -W 1 -w /home/soda/stat/dump.cap" >> /etc/crontab
 echo "* * * * * root /bin/sleep 57; sudo tcpdump -r /home/soda/stat/dump.cap > /home/soda/stat/dump.stat" >> /etc/crontab
 
+mkdir /home/soda/rubbish
+
 apt-get install -y sysstat apache2 php7.0 libapache2-mod-php7.0 bc
 systemctl stop apache2
 apt-get install -y nginx
 systemctl stop nginx
 
+cd /home/soda/rubbish
 git clone https://github.com/cream-soda/linux-c.git
 cd linux-c
 cat default > /etc/nginx/sites-available/default
 cat ports.conf > /etc/apache2/ports.conf
 cat apache2.conf > /etc/apache2/apache2.conf
 
+cd /home/soda/rubbish
 git clone https://github.com/cream-soda/linux-st.git
 cd linux-st
 mv .htaccess /var/www/html/.htaccess
