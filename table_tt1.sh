@@ -8,6 +8,10 @@ num_tcp=$(echo "$num_tcp_1 * 3" | bc)
 num_udp=$(echo "$num_udp_1 * 3" | bc)
 num_icmp=$(echo "$num_icmp_1 * 3" | bc)
 
+len_tcp=0
+len_udp=0
+len_icmp=0
+
 if [[ "$num_tcp_1" -ge 1 ]]
 then
 len_tcp=0
