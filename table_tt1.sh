@@ -9,21 +9,21 @@ num_udp=$(echo "$num_udp * 3" | bc)
 num_icmp=$(echo "$num_icmp * 3" | bc)
 
 len_tcp=0
-for i in seq($num_tcp)
+for i in $(seq $num_tcp)
 do
 num_word=$(cat /home/soda/stat/dump.stat | grep -E "(TCP|tcp)" |  awk "(NR==$i)" | wc -w)
 len_tcp=$(echo "$len_tcp + $(cat /home/soda/stat/dump.stat | grep -E "(TCP|tcp)" |  awk '(NR==$i)' | cut -d" " -f$num_word)" | bc)
 done
 
 len_udp=0
-for i in seq($num_udp)
+for i in $(seq $num_udp)
 do
 num_word=$(cat /home/soda/stat/dump.stat | grep -E "(UDP|udp)" |  awk "(NR==$i)" | wc -w)
 len_udp=$(echo "$len_udp + $(cat /home/soda/stat/dump.stat | grep -E "(UDP|udp)" |  awk '(NR==$i)' | cut -d" " -f$num_word)" | bc)
 done
 
 len_icmp=0
-for i in seq($num_icmp)
+for i in $(seq $num_icmp)
 do
 num_word=$(cat /home/soda/stat/dump.stat | grep -E "(ICMP|icmp)" |  awk "(NR==$i)" | wc -w)
 len_icmp=$(echo "$len_icmp + $(cat /home/soda/stat/dump.stat | grep -E "(ICMP|icmp)" |  awk '(NR==$i)' | cut -d" " -f$num_word)" | bc)
