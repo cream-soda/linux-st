@@ -1,17 +1,17 @@
 #!/bin/bash
 
-num_tcp=$(cat /home/soda/stat/dump.stat | grep -E "(TCP|tcp)" | wc -l)
-num_udp=$(cat /home/soda/stat/dump.stat | grep -E "(UDP|udp)" | wc -l)
-num_icmp=$(cat /home/soda/stat/dump.stat | grep -E "(ICMP|icmp)" | wc -l)
+num_tcp_1=$(cat /home/soda/stat/dump.stat | grep -E "(TCP|tcp)" | wc -l)
+num_udp_1=$(cat /home/soda/stat/dump.stat | grep -E "(UDP|udp)" | wc -l)
+num_icmp_1=$(cat /home/soda/stat/dump.stat | grep -E "(ICMP|icmp)" | wc -l)
 
-num_tcp=$(echo "$num_tcp * 3" | bc)
-num_udp=$(echo "$num_udp * 3" | bc)
-num_icmp=$(echo "$num_icmp * 3" | bc)
+num_tcp=$(echo "$num_tcp_1 * 3" | bc)
+num_udp=$(echo "$num_udp_1 * 3" | bc)
+num_icmp=$(echo "$num_icmp_1 * 3" | bc)
 
-if [ "$num_tcp" -ge "1" ]
+if [[ "$num_tcp_1" -ge 1 ]]
 then
 len_tcp=0
-for i in $(seq $num_tcp)
+for i in $(seq $num_tcp_1)
 do
 num_word=$(cat /home/soda/stat/dump.stat | grep -E "(TCP|tcp)" |  awk "(NR==$i)" | wc -w)
 buff=$(cat /home/soda/stat/dump.stat | grep -E "(TCP|tcp)" |  awk "(NR==$i)" | cut -d" " -f$num_word)
@@ -19,10 +19,10 @@ len_tcp=$(echo "$len_tcp + $buff" | bc)
 done
 fi
 
-if [ "$num_udp" -ge "1" ]
+if [[ "$num_udp_1" -ge 1 ]]
 then
 len_udp=0
-for i in $(seq $num_udp)
+for i in $(seq $num_udp_1)
 do
 num_word=$(cat /home/soda/stat/dump.stat | grep -E "(UDP|udp)" |  awk "(NR==$i)" | wc -w)
 buff=$(cat /home/soda/stat/dump.stat | grep -E "(UDP|udp)" |  awk "(NR==$i)" | cut -d" "  -f$num_word)
@@ -30,10 +30,10 @@ len_udp=$(echo "$len_udp + $buff" | bc)
 done
 fi
 
-if [ "$num_icmp" -ge "1" ]
+if [[ "$num_icmp_1" -ge 1 ]]
 then
 len_icmp=0
-for i in $(seq $num_icmp)
+for i in $(seq $num_icmp_1)
 do
 num_word=$(cat /home/soda/stat/dump.stat | grep -E "(ICMP|icmp)" |  awk "(NR==$i)" | wc -w)
 buff=$(cat /home/soda/stat/dump.stat | grep -E "(ICMP|icmp)" |  awk "(NR==$i)" | cut -d" "  -f$num_word)
