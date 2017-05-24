@@ -34,16 +34,26 @@ for i in $(seq $num_vd)
   echo ${buff//,/.} >> /home/soda/stat/ios_vd_$i.stat
   done
 
+num_mmcblk=$(iostat -k | grep mmcblk | wc -l)
+for i in $(seq $num_mmcblk)
+  do
+  buff=$(iostat -k | grep mmcblk | awk "(NR==$i)")
+  echo ${buff//,/.} >> /home/soda/stat/ios_mmcblk_$i.stat
+  done
+
+
 buff=$(cat /proc/net/dev | awk '(NR==3)')
 echo ${buff/:/} >> /home/soda/stat/net.stat
 
 buff=$(mpstat 3 1 | awk '(NR==4)')
 echo ${buff//,/.} >> /home/soda/stat/cpu.stat
 
+nm=$(echo "$(df | grep -Ev '(tmpfs|udev)' | wc -l) - 1" | bc)
+
 echo "***" >> /home/soda/stat/mem.stat
-df -h | grep -Ev "(tmpfs|udev)" | awk '{print $1 " " $5}' | tail -n$(echo "$(df | grep -Ev '(tmpfs|udev)' | wc -l) - 1" | bc) >> /home/soda/stat/mem.stat
+df -h | grep -Ev "(tmpfs|udev)" | awk '{print $1 " " $5}' | tail -$nm >> /home/soda/stat/mem.stat
 echo "***" >> /home/soda/stat/in_mem.stat
-df -h -i | grep -Ev "(tmpfs|udev)" | awk '{print $1 " " $5}' | tail -n$(echo "$(df | grep -Ev '(tmpfs|udev)' | wc -l) - 1" | bc) >> /home/soda/stat/in_mem.stat
+df -h -i | grep -Ev "(tmpfs|udev)" | awk '{print $1 " " $5}' | tail -$nm >> /home/soda/stat/in_mem.stat
 
 echo "***" >> /home/soda/stat/tcp.stat
 netstat -nlt | grep -Ev tcp6 | tail -n$(echo "$(netstat -nlt | grep -Ev tcp6 | wc -l) - 2" | bc) >> /home/soda/stat/tcp.stat
