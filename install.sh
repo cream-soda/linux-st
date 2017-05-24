@@ -25,7 +25,7 @@ systemctl stop apache2
 
 mkdir /home/soda/rubbish
 
-apt-get -y nginx
+apt-get -y install nginx
 systemctl stop nginx
 
 cd /home/soda/rubbish
